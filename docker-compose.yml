@@ -11,7 +11,7 @@ services:
     image: zcube/cadvisor:latest
     ipc: shareable
     networks:
-      - rpimonitor_default
+      - flownet-feature
     privileged: true
     restart: unless-stopped
     security_opt:
@@ -36,7 +36,7 @@ services:
     hostname: rpi-grafana
     image: grafana/grafana:latest
     networks:
-      - rpimonitor_default
+      - flownet-feature
     ports:
       - 9200:3000
     restart: unless-stopped
@@ -53,7 +53,7 @@ services:
     hostname: rpi-exporter
     image: prom/node-exporter:latest
     networks:
-      - rpimonitor_default
+      - flownet-feature
     restart: unless-stopped
 
   prometheus:
@@ -66,7 +66,7 @@ services:
     hostname: rpi-prom
     image: prom/prometheus:latest
     networks:
-      - rpimonitor_default
+      - flownet-feature
     restart: unless-stopped
     volumes:
       # to be modified depending on your needs
@@ -79,3 +79,5 @@ services:
 networks:
   flownet-feature:
     external: true
+  internal:
+    external: false
